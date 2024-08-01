@@ -1,6 +1,8 @@
 import React from 'react'
 import { CircleX, User } from 'lucide-react'
 
+import { useDeleteContactMutation } from '../redux/contacts/contactsApi'
+
 interface Field {
   id: string
   value: string
@@ -8,11 +10,17 @@ interface Field {
 
 type ContactItemProps = {
   contact: any
-  onDelete: (id: number) => Promise<void>
 }
 
-const ContactItem: React.FC<ContactItemProps> = ({ contact, onDelete }) => {
+const ContactItem: React.FC<ContactItemProps> = ({ contact }) => {
   const getFirstValue = (field: Field[]) => field?.[0]?.value || ''
+
+  const [deleteContact] = useDeleteContactMutation()
+
+  const handleDelete = async (e: React.MouseEvent, id: number) => {
+    e.preventDefault()
+    await deleteContact(id.toString())
+  }
 
   const firstName = getFirstValue(contact.fields['first name'])
   const lastName = getFirstValue(contact.fields['last name'])
@@ -43,7 +51,7 @@ const ContactItem: React.FC<ContactItemProps> = ({ contact, onDelete }) => {
         </div>
       </div>
       <button
-        onClick={() => onDelete(contact.id)}
+        onClick={(event) => handleDelete(event, contact.id)}
         className="text-gray-500 hover:text-gray-700"
       >
         <CircleX />

@@ -9,6 +9,7 @@ export const tagsApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: { tags },
       }),
+      invalidatesTags: ['Contact'],
     }),
   }),
 })

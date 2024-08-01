@@ -15,7 +15,7 @@ export const contactsApi = baseApi.injectEndpoints({
         url: `/contact/${id}`,
         method: 'GET',
       }),
-      providesTags: (result, error, id) => [{ type: 'Contact', id }],
+      providesTags: (id) => [{ type: 'Contact', id }],
     }),
     createContact: builder.mutation({
       query: (newContact) => ({
@@ -30,10 +30,7 @@ export const contactsApi = baseApi.injectEndpoints({
         url: `/contact/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [
-        'Contacts',
-        { type: 'Contact', id },
-      ],
+      invalidatesTags: (id) => ['Contacts', { type: 'Contact', id }],
     }),
   }),
 })

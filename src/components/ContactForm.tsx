@@ -30,7 +30,7 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 rounded-lg sticky top-0 bg-white p-4 shadow-md">
+    <div className="max-w-md mx-auto mt-10 rounded-lg sticky top-0 ">
       <h2 className="text-2xl font-bold mb-6 text-center">Create Contact</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
