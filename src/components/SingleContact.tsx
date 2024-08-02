@@ -1,29 +1,45 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Loader2, User } from 'lucide-react'
 
 import { useGetContactQuery } from '../redux/contacts/contactsApi'
 // import { useAddTagsMutation } from '../redux/tags/tagsApi'
 
-const SingleContact = () => {
+interface ContactResource {
+  fields: {
+    'first name': Array<{ value: string }>
+    'last name': Array<{ value: string }>
+    email: Array<{ value: string }>
+  }
+  tags: Array<{ id: number; tag: string }>
+}
+
+interface ContactResponse {
+  resources: ContactResource[]
+}
+
+const SingleContact: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const { data: contact, isLoading, isError } = useGetContactQuery(id)
-  const [newTags, setNewTags] = useState('')
+  const { data: contact, isLoading, isError } = useGetContactQuery(id!)
+  const [newTags, setNewTags] = useState<string>('')
   // const [addTags] = useAddTagsMutation()
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center w-full h-dvh">
         <Loader2 className="w-8 h-8 animate-spin" />
-      </div
+      </div>
     )
   }
   if (isError) return <div>Error occurred while fetching the contact</div>
 
-  const firstName = contact?.resources[0]?.fields['first name'][0]?.value || ''
-  const lastName = contact?.resources[0]?.fields['last name'][0]?.value || ''
-  const email = contact?.resources[0]?.fields.email[0]?.value || ''
-  const tags = contact?.resources[0]?.tags || []
+  const contactData = contact as ContactResponse
+  const firstName =
+    contactData?.resources[0]?.fields['first name'][0]?.value || ''
+  const lastName =
+    contactData?.resources[0]?.fields['last name'][0]?.value || ''
+  const email = contactData?.resources[0]?.fields.email[0]?.value || ''
+  const tags = contactData?.resources[0]?.tags || []
 
   console.log(contact)
 
@@ -57,7 +73,9 @@ const SingleContact = () => {
         <input
           type="text"
           value={newTags}
-          onChange={(e) => setNewTags(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setNewTags(e.target.value)
+          }
           placeholder="Add new Tags"
           className="w-full p-2 border rounded-lg bg-white"
         />
@@ -67,7 +85,7 @@ const SingleContact = () => {
           Add Tags
         </button>
         <Link className="w-full" to="/">
-          <button className="w-full border bg-black text-white   py-2 rounded">
+          <button className="w-full border bg-black text-white py-2 rounded">
             Back
           </button>
         </Link>

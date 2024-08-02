@@ -12,7 +12,7 @@ const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
 })
 
-type FormData = z.infer<typeof schema>
+export type FormData = z.infer<typeof schema>
 
 const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
   createContact,
@@ -30,7 +30,7 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 rounded-lg sticky top-0 ">
+    <div className="max-w-md mx-auto mt-10 rounded-lg sticky top-0 h-[400px]">
       <h2 className="text-2xl font-bold mb-6 text-center">Create Contact</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">

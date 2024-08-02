@@ -1,5 +1,4 @@
 import { Loader2 } from 'lucide-react'
-import { Outlet } from 'react-router-dom'
 
 import {
   useCreateContactMutation,
@@ -7,14 +6,14 @@ import {
 } from '../redux/contacts/contactsApi'
 
 import MaxWidthWrapper from './MaxWidthWrapper'
-import ContactForm from './ContactForm'
+import ContactForm, { type FormData } from './ContactForm'
 import ContactsList from './ContactList'
 
 function Layout() {
   const { data, error, isLoading } = useGetContactsQuery('contacts')
   const [createContact] = useCreateContactMutation()
 
-  const handleCreateContact = async (formData: any) => {
+  const handleCreateContact = async (formData: FormData) => {
     const newContact = {
       record_type: 'person',
       privacy: {
@@ -49,13 +48,10 @@ function Layout() {
   }
 
   return (
-    <div>
-      <MaxWidthWrapper className="flex flex-col gap-10 md:flex-row">
-        <ContactForm createContact={handleCreateContact} />
-        <ContactsList contacts={data?.resources} />
-      </MaxWidthWrapper>
-      <Outlet />
-    </div>
+    <MaxWidthWrapper className="flex flex-col gap-10 md:flex-row">
+      <ContactForm createContact={handleCreateContact} />
+      <ContactsList contacts={data?.resources} />
+    </MaxWidthWrapper>
   )
 }
 

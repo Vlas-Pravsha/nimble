@@ -2,24 +2,23 @@ import React from 'react'
 import { CircleX, User } from 'lucide-react'
 
 import { useDeleteContactMutation } from '../redux/contacts/contactsApi'
-
-interface Field {
-  id: string
-  value: string
-}
+import { Contact, Field } from '../@types/contact'
 
 type ContactItemProps = {
-  contact: any
+  contact: Contact
 }
 
 const ContactItem: React.FC<ContactItemProps> = ({ contact }) => {
-  const getFirstValue = (field: Field[]) => field?.[0]?.value || ''
+  const getFirstValue = (field: Field[]): string => field?.[0]?.value || ''
 
   const [deleteContact] = useDeleteContactMutation()
 
-  const handleDelete = async (e: React.MouseEvent, id: number) => {
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: number,
+  ) => {
     e.preventDefault()
-    await deleteContact(id.toString())
+    await deleteContact(id)
   }
 
   const firstName = getFirstValue(contact.fields['first name'])
