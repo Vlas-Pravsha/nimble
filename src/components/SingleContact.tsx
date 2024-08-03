@@ -6,9 +6,7 @@ import { useGetContactQuery } from '../redux/contacts/contactsApi'
 import type { Contact } from '../@types/contact'
 import { useAddTagsMutation } from '../redux/tags/tagsApi'
 
-import { Button } from './ui/Button'
-import { Spinner } from './ui/Spinner'
-import { Input } from './ui/Input'
+import { Button, Input, Spinner } from './ui/'
 
 interface ContactResponse {
   resources: Contact[]
@@ -40,9 +38,9 @@ const TagList: React.FC<{ tags: Array<{ id: number, tag: string }> }> = ({
   <div className="mb-6">
     <h3 className="text-lg font-semibold mb-2">Tags</h3>
     <div className="flex flex-wrap gap-2">
-      {tags.map((tag, index) => (
+      {tags.map(tag => (
         <span
-          key={index}
+          key={tag.id}
           className="px-3 py-1 bg-gray-200 rounded-full text-sm"
         >
           {tag.tag}

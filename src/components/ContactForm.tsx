@@ -2,10 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-
-import { Label } from './ui/Label'
-import { Input } from './ui/Input'
-import { Button } from './ui/Button'
+import { Button, Input, Label } from './ui/'
 
 const schema = z.object({
   firstName: z.string().optional(),
@@ -21,6 +18,7 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -28,6 +26,7 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
 
   const onSubmit = (data: FormData) => {
     createContact(data)
+    reset()
   }
 
   return (

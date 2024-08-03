@@ -7,7 +7,7 @@ import { createContactPayload } from '../lib/utils'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import ContactForm, { type FormData } from './ContactForm'
 import ContactsList from './ContactList'
-import { Spinner } from './ui/Spinner'
+import { Spinner } from './ui/'
 
 function Layout() {
   const { data, error, isLoading } = useGetContactsQuery('contacts')
