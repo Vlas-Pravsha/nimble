@@ -1,5 +1,3 @@
-import { Loader2 } from 'lucide-react'
-
 import {
   useCreateContactMutation,
   useGetContactsQuery,
@@ -9,6 +7,7 @@ import { createContactPayload } from '../lib/utils'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import ContactForm, { type FormData } from './ContactForm'
 import ContactsList from './ContactList'
+import { Spinner } from './ui/Spinner'
 
 function Layout() {
   const { data, error, isLoading } = useGetContactsQuery('contacts')
@@ -19,13 +18,7 @@ function Layout() {
     await createContact(newContact)
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center w-full h-dvh">
-        <Loader2 className="w-8 h-8 animate-spin" />
-      </div>
-    )
-  }
+  if (isLoading) return <Spinner />
 
   if (error) {
     return <h1>Error loading contacts</h1>

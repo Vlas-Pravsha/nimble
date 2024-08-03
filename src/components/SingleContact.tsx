@@ -1,21 +1,16 @@
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Loader2, User } from 'lucide-react'
+import { User } from 'lucide-react'
 
 import { useGetContactQuery } from '../redux/contacts/contactsApi'
 import { Contact } from '../@types/contact'
 
 import { Button } from './ui/Button'
+import { Spinner } from './ui/Spinner'
 
 interface ContactResponse {
   resources: Contact[]
 }
-
-const LoadingSpinner: React.FC = () => (
-  <div className="flex items-center justify-center w-full h-dvh">
-    <Loader2 className="w-8 h-8 animate-spin" />
-  </div>
-)
 
 const ErrorMessage: React.FC = () => (
   <div>Error occurred while fetching the contact</div>
@@ -86,7 +81,7 @@ const SingleContact: React.FC = () => {
   const { data: contact, isLoading, isError } = useGetContactQuery(id!)
   const [newTags, setNewTags] = useState<string>('')
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <Spinner />
   if (isError) return <ErrorMessage />
 
   const contactData = contact as ContactResponse
