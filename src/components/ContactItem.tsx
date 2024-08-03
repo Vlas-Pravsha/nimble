@@ -4,20 +4,22 @@ import { CircleX, User } from 'lucide-react'
 import { useDeleteContactMutation } from '../redux/contacts/contactsApi'
 import { Contact, Field } from '../@types/contact'
 
+import { Button } from './ui/Button'
+
 type ContactItemProps = {
   contact: Contact
 }
 
 const ContactItem: React.FC<ContactItemProps> = ({ contact }) => {
-  const getFirstValue = (field: Field[]): string => field?.[0]?.value || ''
-
   const [deleteContact] = useDeleteContactMutation()
 
+  const getFirstValue = (field: Field[]): string => field?.[0]?.value || ''
+
   const handleDelete = async (
-    e: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>,
     id: number,
   ) => {
-    e.preventDefault()
+    event.preventDefault()
     await deleteContact(id)
   }
 
@@ -39,22 +41,22 @@ const ContactItem: React.FC<ContactItemProps> = ({ contact }) => {
         </h3>
         {email && <p className="text-sm text-gray-600">{email}</p>}
         <div className="mt-2 flex flex-wrap">
-          {contact.tags.map((tag) => (
+          {contact.tags.map(({ id, tag }) => (
             <span
-              key={tag.id}
+              key={id}
               className="bg-gray-300 text-sm px-2 py-1 rounded mr-2 mb-2"
             >
-              {tag.tag}
+              {tag}
             </span>
           ))}
         </div>
       </div>
-      <button
+      <Button
+        variant="icon"
         onClick={(event) => handleDelete(event, contact.id)}
-        className="text-gray-500 hover:text-gray-700"
       >
         <CircleX />
-      </button>
+      </Button>
     </div>
   )
 }

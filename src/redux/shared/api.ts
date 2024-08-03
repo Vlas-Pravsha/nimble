@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const baseUrl =
-  'https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1'
-const API_KEY = 'VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn'
+const baseUrl = import.meta.env.VITE_BASE_URL
+const API_KEY = import.meta.env.VITE_API_KEY
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({

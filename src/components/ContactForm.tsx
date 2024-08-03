@@ -5,6 +5,7 @@ import * as z from 'zod'
 
 import { Label } from './ui/Label'
 import { Input } from './ui/Input'
+import { Button } from './ui/Button'
 
 const schema = z.object({
   firstName: z.string().optional(),
@@ -58,12 +59,9 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
             error={errors.email?.message}
           />
         </div>
-        <button
-          type="submit"
-          className="w-full border border-gray-500 bg-white text-xl font-bold text-black py-2 px-4 rounded-md transition duration-300"
-        >
+        <Button variant="primary" size="large" type="submit">
           Add Contact
-        </button>
+        </Button>
       </form>
     </div>
   )

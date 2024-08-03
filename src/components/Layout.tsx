@@ -4,6 +4,7 @@ import {
   useCreateContactMutation,
   useGetContactsQuery,
 } from '../redux/contacts/contactsApi'
+import { createContactPayload } from '../lib/utils'
 
 import MaxWidthWrapper from './MaxWidthWrapper'
 import ContactForm, { type FormData } from './ContactForm'
@@ -14,24 +15,7 @@ function Layout() {
   const [createContact] = useCreateContactMutation()
 
   const handleCreateContact = async (formData: FormData) => {
-    const newContact = {
-      record_type: 'person',
-      privacy: {
-        edit: null,
-        read: null,
-      },
-      owner_id: null,
-      fields: {
-        'first name': [
-          { value: formData.firstName, modifier: '', label: 'first name' },
-        ],
-        'last name': [
-          { value: formData.lastName, modifier: '', label: 'last name' },
-        ],
-        email: [{ value: formData.email, modifier: '', label: 'email' }],
-      },
-    }
-
+    const newContact = createContactPayload(formData)
     await createContact(newContact)
   }
 
