@@ -2,10 +2,10 @@ import { baseApi } from '../shared/api'
 
 export const tagsApi = baseApi.injectEndpoints({
   overrideExisting: true,
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     addTags: builder.mutation({
       query: ({ id, tags }) => ({
-        url: `/contact/${id}/tags`,
+        url: `/contacts/${id}/tags`,
         method: 'PUT',
         body: { tags },
       }),
@@ -13,5 +13,4 @@ export const tagsApi = baseApi.injectEndpoints({
     }),
   }),
 })
-
 export const { useAddTagsMutation } = tagsApi

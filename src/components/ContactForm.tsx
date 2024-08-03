@@ -31,7 +31,7 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 rounded-lg sticky top-0 h-[400px]">
+    <div className="min-w-[14rem] mx-auto mt-10 rounded-lg top-0 h-[400px] md:sticky">
       <h2 className="text-2xl font-bold mb-6 text-center">Create Contact</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
@@ -59,7 +59,7 @@ const ContactForm: React.FC<{ createContact: (data: FormData) => void }> = ({
             error={errors.email?.message}
           />
         </div>
-        <Button variant="primary" size="large" type="submit">
+        <Button variant="primary" size="large" type="submit" fullWidth>
           Add Contact
         </Button>
       </form>

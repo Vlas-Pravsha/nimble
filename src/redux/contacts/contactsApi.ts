@@ -2,7 +2,7 @@ import { baseApi } from '../shared/api'
 
 export const contactsApi = baseApi.injectEndpoints({
   overrideExisting: true,
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getContacts: builder.query({
       query: () => ({
         url: '/contacts?sort=created:desc',
@@ -11,14 +11,14 @@ export const contactsApi = baseApi.injectEndpoints({
       providesTags: ['Contacts'],
     }),
     getContact: builder.query({
-      query: (id) => ({
+      query: id => ({
         url: `/contact/${id}`,
         method: 'GET',
       }),
-      providesTags: (id) => [{ type: 'Contact', id }],
+      providesTags: id => [{ type: 'Contact', id }],
     }),
     createContact: builder.mutation({
-      query: (newContact) => ({
+      query: newContact => ({
         url: '/contact',
         method: 'POST',
         body: newContact,
@@ -26,11 +26,11 @@ export const contactsApi = baseApi.injectEndpoints({
       invalidatesTags: ['Contacts'],
     }),
     deleteContact: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: `/contact/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (id) => ['Contacts', { type: 'Contact', id }],
+      invalidatesTags: id => ['Contacts', { type: 'Contact', id }],
     }),
   }),
 })

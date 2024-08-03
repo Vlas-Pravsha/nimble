@@ -9,7 +9,7 @@ export interface Contact {
   fields: {
     'first name': Field[]
     'last name': Field[]
-    email: Field[]
+    'email': Field[]
   }
-  tags: Array<{ id: number; tag: string }>
+  tags: Array<{ id: number, tag: string }>
 }

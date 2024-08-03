@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import {  Routes,Route } from 'react-router-dom'
 
 import Layout from './components/Layout'
 import SingleContact from './components/SingleContact'
 
-const App = () => {
+function App() {
   return (
     <>
       <Routes>

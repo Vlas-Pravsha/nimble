@@ -18,7 +18,8 @@ function Layout() {
     await createContact(newContact)
   }
 
-  if (isLoading) return <Spinner />
+  if (isLoading)
+    return <Spinner />
 
   if (error) {
     return <h1>Error loading contacts</h1>

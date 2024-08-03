@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Contact } from '../@types/contact'
+import type { Contact } from '../@types/contact'
 
 import ContactItem from './ContactItem'
 
