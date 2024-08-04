@@ -2,7 +2,6 @@ import React from 'react'
 import { CircleX, User } from 'lucide-react'
 
 import { useDeleteContactMutation } from '../redux/contacts/contactsApi'
-import type { Contact, Field } from '../@types/contact'
 
 import { Button } from './ui/'
 

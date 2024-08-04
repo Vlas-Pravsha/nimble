@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import { User } from 'lucide-react'
 
 import { useGetContactQuery } from '../redux/contacts/contactsApi'
-import type { Contact } from '../@types/contact'
 import { useAddTagsMutation } from '../redux/tags/tagsApi'
 
 import { Button, Input, Spinner } from './ui/'

@@ -5,12 +5,10 @@ import SingleContact from './components/SingleContact'
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}></Route>
-        <Route path="contacts/:id" element={<SingleContact />}></Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}></Route>
+      <Route path="contacts/:id" element={<SingleContact />}></Route>
+    </Routes>
   )
 }
 
